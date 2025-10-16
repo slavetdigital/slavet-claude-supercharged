@@ -1,0 +1,14 @@
+{
+  "name": "Slevet Claude Supercharged",
+  "owner": {
+    "name": "Slav\u0113t Digital",
+    "url": "https://www.slavetdigital.com"
+  },
+  "plugins": [
+    {
+      "name": "slavet-claude",
+      "description": "Lightweight enterprise guardrails, memory, checkpoints, JSON/diff/flag verification, with auto hooks and minimal MCP.",
+      "source": "./plugins/slavet-claude"
+    }
+  ]
+}
