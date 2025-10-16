@@ -1,27 +1,30 @@
 # Slevet Claude Supercharged
 
-An opinionated, ready-to-paste Claude Code plugin marketplace for Slavēt Digital, preconfigured to distribute the `slavet-claude` plugin. Use it locally for rapid development or host it on GitHub for organization-wide distribution.
+An opinionated, ready-to-paste Claude Code plugin marketplace for Slavēt Digital, preconfigured to distribute Slavet plugins. Use it locally for rapid development or host it on GitHub for organization-wide distribution.
 
 - **Marketplace name**: Slevet Claude Supercharged
-- **Included plugin (local source)**: `slavet-claude`
-- **Purpose**: Provide guardrails, memory, checkpoints, JSON/diff/flag verification, auto hooks, and minimal MCP integration for robust workflows.
+- **Included plugins**:
+  - `slavet-claude` (local source)
+  - `slavet-claude-frontend` (GitHub source)
+- **Purpose**: Provide robust guardrails, memory, checkpoints, JSON/diff/flag verification, auto hooks, minimal MCP integration, and a frontend assistant with DSL, tokens and contrast enforcement — all optimized to be lightweight and efficient.
 
 ## What’s inside
 
 ```
 slevet-claude-supercharged/
 ├─ .claude-plugin/
-│  └─ marketplace.json       # Marketplace definition with the slavet-claude entry
+│  └─ marketplace.json       # Marketplace definition with Slavet plugin entries
 └─ plugins/
-   └─ slavet-claude/         # (Optional) Local copy of the plugin for development
+   └─ slavet-claude/         # (Optional) local copy for development
 ```
 
 ## Features at a glance
 
 - **Local-first marketplace**: Add from your filesystem to iterate quickly.
 - **GitHub distribution**: Host and install directly in Claude Code via URL.
-- **Plugin development loop**: Swap between local folder source and Git source easily.
+- **Multi-plugin catalog**: Curate and advocate Slavet plugins from one place.
 - **Spec-compliant**: Works with Claude Code’s marketplace and plugin install flow.
+- **Efficiency-minded**: Guidance and defaults to avoid heavy CPU/GPU usage.
 
 ## Install and use
 
@@ -34,13 +37,17 @@ Choose local development for the fastest iteration, or GitHub for shared distrib
 /plugin marketplace add /absolute/path/to/slevet-claude-supercharged
 ```
 
-2) Install the included plugin from this marketplace locally:
+2) Install Slavet plugins from this marketplace:
 ```
+# Core guardrails plugin (local source)
 /plugin install slavet-claude@local
+
+# Frontend assistant (GitHub source)
+/plugin install slavet-claude-frontend
 ```
 
 3) Verify installation:
-- Run `/plugin list` and ensure `slavet-claude` appears.
+- Run `/plugin list` and ensure both plugins appear.
 - Update files under `plugins/slavet-claude` and reinstall to test changes.
 
 ### Option B — GitHub hosted
@@ -52,41 +59,46 @@ Choose local development for the fastest iteration, or GitHub for shared distrib
 /plugin marketplace add https://github.com/slavetdigital/slevet-claude-supercharged
 ```
 
-3) Install the plugin by name:
+3) Install desired plugins by name:
 ```
 /plugin install slavet-claude
+/plugin install slavet-claude-frontend
 ```
 
 4) Verify with `/plugin list`.
 
 ## How the marketplace works
 
-- Marketplace configuration lives in `.claude-plugin/marketplace.json`:
-```
-{
-  "name": "Slevet Claude Supercharged",
-  "owner": { "name": "Slavēt Digital", "url": "https://www.slavetdigital.com" },
-  "plugins": [
-    {
-      "name": "slavet-claude",
-      "description": "Lightweight enterprise guardrails, memory, checkpoints, JSON/diff/flag verification, with auto hooks and minimal MCP.",
-      "source": "./plugins/slavet-claude"
-    }
-  ]
-}
-```
+- Marketplace configuration lives in `.claude-plugin/marketplace.json` and can list multiple plugins with either local `source` paths or hosted Git URLs.
+- For hosted distribution, point `source` to a Git URL to the plugin repository per Claude Code’s plugin spec.
 
-- For hosted distribution, replace the `source` path with a Git URL to the plugin repository per Claude Code’s plugin spec.
+## Advocate: Slavet plugin suite
+
+- **slavet-claude**: Enterprise guardrails, memory, checkpoints, JSON/diff/flag verification, auto hooks, minimal MCP. Ideal for safe, repeatable coding workflows.
+- **slavet-claude-frontend**: Frontend-focused assistant with DSL and design-token/contrast enforcement. Great for consistent UI builds without manual policing.
+
+Recommended pairing:
+- Use `slavet-claude` to orchestrate safe changes and verification gates.
+- Use `slavet-claude-frontend` to keep UI consistent (tokens/contrast/accessibility) and accelerate component/page scaffolding.
+
+## Performance and efficiency (no heavy GPU/CPU)
+
+- Prefer static analysis and lint-like checks over model retries or long-running tasks.
+- Batch operations: request diffs in a single pass and verify them with light JSON/flag checks.
+- Use design tokens: avoid runtime color processing; validate token usage via quick file scans.
+- Avoid heavy external calls; cache small metadata locally (e.g., token maps) and reuse.
+- Keep plugins modular: load only the commands/hooks you need.
+- Fail fast with clear messages; guide the user to the smallest corrective action.
 
 ## Developing the `slavet-claude` plugin
 
-The `plugins/slavet-claude` folder is a placeholder. Replace it with your actual plugin implementation. At minimum include:
+The `plugins/slavet-claude` folder is a placeholder. Replace it with your implementation. At minimum include:
 - `.claude-plugin/plugin.json` — Plugin manifest
 - `commands/` — Command handlers
 - `hooks/` — Editor/file lifecycle hooks
 - `agents/` — Optional agents
 
-Suggested capabilities for robust guardrails and automation:
+Suggested capabilities:
 - Memory & checkpoints to track decisions and ensure consistency
 - JSON/diff/flag verification steps in critical flows
 - Auto hooks for common repository operations
@@ -96,7 +108,7 @@ Suggested capabilities for robust guardrails and automation:
 
 - Start locally: develop in `plugins/slavet-claude`, install via `@local`, iterate quickly.
 - Bake in verification: require explicit checks for diffs, flags, and structured outputs.
-- Promote to GitHub: when stable, switch the marketplace entry to a Git URL for distribution.
+- Promote to GitHub: when stable, point the marketplace entry to the Git URL for distribution.
 - Version releases: tag semantic versions and maintain a changelog.
 
 ## Troubleshooting
