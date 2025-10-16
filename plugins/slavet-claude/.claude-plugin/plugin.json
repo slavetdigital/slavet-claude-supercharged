@@ -1,0 +1,11 @@
+{
+  "name": "slavet-claude",
+  "version": "0.0.0-local",
+  "description": "Local stub for development: guardrails and verification scaffolding.",
+  "author": { "name": "Slavēt Digital", "url": "https://www.slavetdigital.com" },
+  "license": "MIT",
+  "commands": ["./commands"],
+  "agents": "./agents",
+  "hooks": "./hooks/hooks.json"
+}
+
