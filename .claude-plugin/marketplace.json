@@ -1,5 +1,5 @@
 {
-  "name": "Slevet Claude Supercharged",
+  "name": "slevet-claude-supercharged",
   "owner": {
     "name": "Slavēt Digital",
     "url": "https://www.slavetdigital.com"
@@ -13,7 +13,7 @@
     {
       "name": "slavet-claude-frontend",
       "description": "Enterprise frontend assistant with DSL, MCP, auto-checks, and tokens/contrast enforcement.",
-      "source": "https://github.com/slavetdigital/slavet-claude-frontend"
+      "source": "./plugins/slavet-claude-frontend"
     }
   ]
 }
