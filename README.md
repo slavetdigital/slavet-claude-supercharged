@@ -25,6 +25,15 @@ slevet-claude-supercharged/
 - **Multi-plugin catalog**: Curate and advocate Slavet plugins from one place.
 - **Spec-compliant**: Works with Claude Code’s marketplace and plugin install flow.
 - **Efficiency-minded**: Guidance and defaults to avoid heavy CPU/GPU usage.
+- **Non-hallucination policy**: Oriented around verifiable facts, repo data, and explicit context.
+- **Credit-aware design**: Minimizes external API calls; reuses cached, local context when possible.
+
+## Operational guardrails
+
+- Ensure the marketplace and plugins remain lightweight and do not slow theme development.
+- Manage context and API credits wisely; prefer local/static checks over repeated model calls.
+- Base outputs on available facts and repository data; avoid speculation or hallucination.
+- Maintain compatibility with the Claude ecosystem and the Claude Code plugin marketplace spec.
 
 ## Install and use
 
